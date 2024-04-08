@@ -1,0 +1,413 @@
+---
+title: "End of Year MyEmma"
+author: "Kate Spiekerman, kls5665"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r global_options, echo=FALSE}
+knitr::opts_chunk$set(fig.height=4, fig.width=5, warning=FALSE, tidy=TRUE, tidy.opts=list(width.cutoff=60))
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r, echo=FALSE}
+my_emma <- read.csv('my_emma.csv')
+
+opens <- my_emma %>%
+  filter(Action == 'opens')
+
+austin <- my_emma %>%
+  filter(Action == 'sent to' & Area == 'Austin')
+
+four_points <- my_emma %>%
+  filter(Action == 'sent to' & Area == 'Four Points')
+
+lake_travis <- my_emma %>%
+  filter(Action == 'Sent to' & Area == 'Lake Travis')
+
+cedar_park <- my_emma %>%
+  filter(Action == 'sent to' & Area == 'Cedar Park')
+
+round_rock <- my_emma %>%
+  filter(Action == 'sent to' & Area == 'Round Rock')
+
+westlake <- my_emma %>%
+  filter(Action == 'sent to' & Area == 'Westlake')
+
+44091 / (5000 * 6 + 2755 * 3 + 690 * 6 + 1833 * 2 + 701 * 6 + 4306 * 6) * 100
+
+```
+
+**Number of Area that Used Each Email**
+
+Pre giving- 5
+
+Giving- 5
+
+Post Giving- 4
+
+Merry Christmas- 5
+
+Last Chance- 5
+
+Happy New Year- 5
+
+**Number of Emails Each Area Used**
+
+Austin- 6
+
+Four Points- 3
+
+Lake Travis- 6
+
+Cedar Park- 2
+
+Round Rock- 6
+
+Westlake- 6
+
+**Sent to By Area**
+
+Austin- 5000
+
+Four Points- 2755
+
+Lake Travis- 690
+
+Cedar Park- 1833
+
+Round Rock- 701
+
+Westlake- 4306
+
+
+
+**Overall Open Rate:**
+57.93%
+
+```{r, echo=FALSE, message=FALSE}
+pre_giving_opens <- opens %>%
+  filter(Email.Title == 'Pre-Giving Tuesday')
+
+7732 / (5000 + 690 + 1833 + 701 + 4306) * 100
+
+giving_opens <- opens %>%
+  filter(Email.Title == 'Giving Tuesday')
+
+7113 / (5000 + 690 + 1833 + 701 + 4306) * 100
+
+post_giving_opens <- opens %>%
+  filter(Email.Title == 'Post Giving Tuesday')
+
+7732 / (5000 + 690 + 701 + 4306) * 100
+
+merry_christmas_opens <- opens %>%
+  filter(Email.Title == 'Merry Christmas')
+
+7806 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+last_chance_opens <- opens %>%
+  filter(Email.Title == 'Last Chance' | Email.Title == 'Last Chance EOY')
+
+7492 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+happy_new_years_opens <- opens %>%
+  filter(Email.Title == 'Happy New Year' | Email.Title == 'Post New Years' | Email.Title == 'Happy New Years')
+
+7535 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+```
+
+
+**Opens Rates by Email**
+
+Pre-Giving: 61.71%
+
+Giving: 56.77%
+
+Post-Giving: 72.28%
+
+Merry Christmas: 58.03%
+
+Last Chance: 55.69%
+
+Happy New Year: 56.01%
+
+```{r, echo=FALSE, message=FALSE}
+1868 / (5000 * 6 + 2755 * 3 + 690 * 6 + 1833 * 2 + 701 * 6 + 4306 * 6) * 100
+```
+
+
+**Overall Click Rate:**
+2.45%
+
+
+```{r, echo=FALSE, message=FALSE}
+clicks <- my_emma %>%
+  filter(Action == 'clicks')
+
+pre_giving_clicks <- clicks %>%
+  filter(Email.Title == 'Pre-Giving Tuesday')
+
+318 / (5000 + 690 + 1833 + 701 + 4306) * 100
+
+giving_clicks <- clicks %>%
+  filter(Email.Title == 'Giving Tuesday')
+
+382 / (5000 + 690 + 1833 + 701 + 4306) * 100
+
+post_giving_clicks <- clicks %>%
+  filter(Email.Title == 'Post Giving Tuesday')
+
+498 / (5000 + 690 + 701 + 4306) * 100
+
+merry_christmas_clicks <- clicks %>%
+  filter(Email.Title == 'Merry Christmas')
+
+125 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+last_chance_clicks <- clicks %>%
+  filter(Email.Title == 'Last Chance' | Email.Title == 'Last Chance EOY')
+
+257 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+happy_new_years_clicks <- clicks %>%
+  filter(Email.Title == 'Happy New Year' | Email.Title == 'Post New Years' | Email.Title == 'Happy New Years')
+
+256 / (5000 + 690 + 701 + 4306 + 2755) * 100
+```
+
+
+**Click Rates by Email**
+
+Pre-Giving: 2.54%
+
+Giving: 3.05%
+
+Post-Giving: 4.66%
+
+Merry Christmas: .93%
+
+Last Chance: 1.91%
+
+Happy New Year: 1.90%
+
+
+```{r, echo=FALSE, message=FALSE}
+781 / (5000 * 6 + 2755 * 3 + 690 * 6 + 1833 * 2 + 701 * 6 + 4306 * 6) * 100
+```
+
+
+**Overall Optout Rate:**
+1.03%
+
+
+```{r, echo=FALSE, message=FALSE}
+optouts <- my_emma %>%
+  filter(Action == 'optout' | Action == 'optouts')
+
+pre_giving_opt <- optouts %>%
+  filter(Email.Title == 'Pre-Giving Tuesday')
+
+158 / (5000 + 690 + 1833 + 701 + 4306) * 100
+
+giving_opt <- optouts %>%
+  filter(Email.Title == 'Giving Tuesday')
+
+141 / (5000 + 690 + 1833 + 701 + 4306) * 100
+
+post_giving_opt <- optouts %>%
+  filter(Email.Title == 'Post Giving Tuesday')
+
+41 / (5000 + 690 + 701 + 4306) * 100
+
+merry_christmas_opt <- optouts %>%
+  filter(Email.Title == 'Merry Christmas')
+
+121 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+last_chance_opt <- optouts %>%
+  filter(Email.Title == 'Last Chance' | Email.Title == 'Last Chance EOY')
+
+135 / (5000 + 690 + 701 + 4306 + 2755) * 100
+
+happy_new_years_opt <- optouts %>%
+  filter(Email.Title == 'Happy New Year' | Email.Title == 'Post New Years' | Email.Title == 'Happy New Years')
+
+130 / (5000 + 690 + 701 + 4306 + 2755) * 100
+```
+
+
+**Click Rates by Email**
+
+Pre-Giving: 1.26%
+
+Giving: 1.13%
+
+Post-Giving: .38%
+
+Merry Christmas: .90%
+
+Last Chance: 1.00%
+
+Happy New Year: .97%
+
+```{r, echo=FALSE}
+austin_open <- opens %>%
+  filter(Area == 'Austin')
+
+17273 / (5000 * 6) * 100
+
+four_points_open <- opens %>%
+  filter(Area == 'Four Points')
+
+4545 / (2755 * 3) * 100
+
+lake_travis_open <- opens %>%
+  filter(Area == 'Lake Travis')
+
+2668 / (690 * 6) * 100
+
+cedar_park_open <- opens %>%
+  filter(Area == 'Cedar Park')
+
+2108 / (1833 * 2) * 100
+
+round_rock_open <- opens %>%
+  filter(Area == 'Round Rock')
+
+2479 / (701 * 6) * 100
+
+westlake_open <- opens %>%
+  filter(Area == 'Westlake')
+
+15018 / (4306 * 6) * 100
+```
+
+**Area Average Open Rate**
+
+Austin- 57.58%
+
+Four Points- 54.99%
+
+Lake Travis- 64.44%
+
+Cedar Park- 57.50%
+
+Round Rock- 58.94%
+
+Westlake- 58.13%
+
+
+```{r, echo=FALSE}
+austin_click <- clicks %>%
+  filter(Area == 'Austin')
+
+137 / (5000 * 6) * 100
+
+four_points_click <- clicks %>%
+  filter(Area == 'Four Points')
+
+96 / (2755 * 3) * 100
+
+lake_travis_click <- clicks %>%
+  filter(Area == 'Lake Travis')
+
+69 / (690 * 6) * 100
+
+cedar_park_click <- clicks %>%
+  filter(Area == 'Cedar Park')
+
+45 / (1833 * 2) * 100
+
+round_rock_click <- clicks %>%
+  filter(Area == 'Round Rock')
+
+34 / (701 * 6) * 100
+
+westlake_click <- clicks %>%
+  filter(Area == 'Westlake')
+
+1487 / (4306 * 6) * 100
+```
+
+
+**Area Average Click Rate**
+
+Austin- .46%
+
+Four Points- 1.16%
+
+Lake Travis- 1.67%
+
+Cedar Park- 1.23%
+
+Round Rock- .81%
+
+Westlake- 5.76%
+
+
+```{r, echo=FALSE}
+austin_opt <- optouts %>%
+  filter(Area == 'Austin')
+
+347 / (5000 * 6) * 100
+
+four_points_opt <- optouts %>%
+  filter(Area == 'Four Points')
+
+121 / (2755 * 3) * 100
+
+lake_travis_opt <- optouts %>%
+  filter(Area == 'Lake Travis')
+
+10 / (690 * 6) * 100
+
+cedar_park_opt <- optouts %>%
+  filter(Area == 'Cedar Park')
+
+33 / (1833 * 2) * 100
+
+round_rock_opt <- optouts %>%
+  filter(Area == 'Round Rock')
+
+44 / (701 * 6) * 100
+
+westlake_opt <- optouts %>%
+  filter(Area == 'Westlake')
+
+226 / (4306 * 6) * 100
+```
+
+**Area Average Unsubscribe Rate**
+
+Austin- 1.16%
+
+Four Points- 1.46%
+
+Lake Travis- .24%
+
+Cedar Park- .90%
+
+Round Rock- 1.05%%
+
+Westlake- .87%
+
+
+**Number of Emails Opened prior to Giving**
+
+Pre-giving Opens: 7732
+
+
+
+
+
+
+
